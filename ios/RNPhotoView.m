@@ -140,6 +140,7 @@
 #pragma mark - Setup
 
 - (CGFloat)initialZoomScaleWithMinScale {
+    CGFloat minZoom = self.minimumZoomScale;
     CGFloat zoomScale = self.minimumZoomScale;
     if (_photoImageView) {
         // Zoom image to fill if the aspect ratios are fairly similar
@@ -154,6 +155,7 @@
             zoomScale = MAX(xScale, yScale);
             // Ensure we don't zoom in or out too far, just in case
             zoomScale = MIN(MAX(self.minimumZoomScale, zoomScale), self.maximumZoomScale);
+            zoomScale = MIN(MAX(minZoom, zoomScale), minZoom);
         }
     }
     return zoomScale;
