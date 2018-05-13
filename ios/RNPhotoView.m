@@ -385,6 +385,11 @@
 
 #pragma mark - Private
 
+-(void)onChangeImage:(NSNotification *)notification
+{
+    NSLog(@"%@",notification.userInfo);
+}
+
 - (void)initView {
     _minZoomScale = 1.0;
     _maxZoomScale = 5.0;
@@ -409,6 +414,8 @@
     _photoImageView.contentMode = UIViewContentModeCenter;
     _photoImageView.tapDelegate = self;
     [self addSubview:_photoImageView];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onChangeImage:) name:@"ChangeImage" object:nil];
 }
 
 @end
